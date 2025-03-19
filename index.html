@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Wheel and Picker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="color-wheel-container">
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <!-- Definitions for filters, gradients, etc -->
+                <defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    
+                    <clipPath id="circularBoundary">
+                        <circle cx="250" cy="250" r="185" />
+                    </clipPath>
+                </defs>
+                
+                <!-- Rhombus petals -->
+                <g id="petals" clip-path="url(#circularBoundary)">
+                    <!-- Petals will be added here by script -->
+                </g>
+                
+                <circle cx="250" cy="250" r="10" fill="white" />
+                <circle cx="250" cy="250" r="50" fill="url(#center-glow)" />
+                
+                <radialGradient id="center-glow" cx="250" cy="250" r="50" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="white" />
+                    <stop offset="100%" stop-color="white" stop-opacity="0" />
+                </radialGradient>
+            </svg>
+        </div>
+        
+        <div class="color-picker-container">
+            <div class="color-preview">
+                <div class="color-overlay" id="colorPreview"></div>
+            </div>
+            
+            <div class="value-display" id="valueDisplay">195</div>
+            
+            <div class="rgb-controls">
+                <div class="rgb-control">
+                    <label for="redValue">R</label>
+                    <input type="text" id="redValue" value="195" maxlength="3">
+                    <input type="range" id="redSlider" min="0" max="255" value="195">
+                    <div class="value-tooltip" id="redTooltip">195</div>
+                </div>
+                
+                <div class="rgb-control">
+                    <label for="greenValue">G</label>
+                    <input type="text" id="greenValue" value="177" maxlength="3">
+                    <input type="range" id="greenSlider" min="0" max="255" value="177">
+                    <div class="value-tooltip" id="greenTooltip">177</div>
+                </div>
+                
+                <div class="rgb-control">
+                    <label for="blueValue">B</label>
+                    <input type="text" id="blueValue" value="239" maxlength="3">
+                    <input type="range" id="blueSlider" min="0" max="255" value="239">
+                    <div class="value-tooltip" id="blueTooltip">239</div>
+                </div>
+                
+                <div class="rgb-control">
+                    <label for="alphaValue">A</label>
+                    <input type="text" id="alphaValue" value="100" maxlength="3">
+                    <input type="range" id="alphaSlider" min="0" max="100" value="100">
+                    <div class="value-tooltip" id="alphaTooltip">100</div>
+                </div>
+            </div>
+            
+            <div class="color-info">
+                <div class="info-item">
+                    <h3>Brightness</h3>
+                    <div class="info-value" id="brightnessValue">0%</div>
+                </div>
+                <div class="info-item">
+                    <h3>Luminosity</h3>
+                    <div class="info-value" id="luminosityValue">0%</div>
+                </div>
+                <div class="info-item">
+                    <h3>HSL</h3>
+                    <div class="info-value" id="hslValue">0°, 0%, 0%</div>
+                </div>
+                <div class="info-item">
+                    <h3>Hex</h3>
+                    <div class="info-value" id="hexValue">#000000</div>
+                </div>
+            </div>
+            
+            <div class="output-formats">
+                <h3>Copy Color Values</h3>
+                <div class="format-item">
+                    <span class="format-label">RGB</span>
+                    <span class="format-value" id="rgbFormat">rgb(195, 177, 239)</span>
+                </div>
+                <div class="format-item">
+                    <span class="format-label">RGBA</span>
+                    <span class="format-value" id="rgbaFormat">rgba(195, 177, 239, 1)</span>
+                </div>
+                <div class="format-item">
+                    <span class="format-label">HEX</span>
+                    <span class="format-value" id="hexFormat">#c3b1ef</span>
+                </div>
+                <div class="format-item">
+                    <span class="format-label">HSL</span>
+                    <span class="format-value" id="hslFormat">hsl(255, 71%, 81%)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
